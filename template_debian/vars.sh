@@ -25,7 +25,7 @@ DEBIANVERSION=${DIST}
 # Location to grab Debian packages
 # ------------------------------------------------------------------------------
 DEFAULT_DEBIAN_MIRRORS=(
-    'https://deb.debian.org/debian'
+    'http://HTTPS///deb.debian.org/debian'
     'http://deb.debian.org/debian'
     'http://ftp.us.debian.org/debian'
     'http://ftp.ca.debian.org/debian'
