@@ -183,7 +183,7 @@ EOF
 
 if [ -n "$REPO_PROXY" ]; then
 cat >> ${DIR}/etc/apt/apt.conf.d/01Proxy <<EOF
-Acquire::http::Proxy=${REPO_PROXY}
+Acquire::http::Proxy "${REPO_PROXY}";
 EOF
 fi
 
