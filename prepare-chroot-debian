@@ -177,3 +177,13 @@ cat > $DIR/etc/apt/sources.list.d/qubes-builder.list <<EOF
 deb [trusted=yes] file:/tmp/qubes-deb $DIST main
 EOF
 
+# ------------------------------------------------------------------------------
+# Set proxy in chroot
+# ------------------------------------------------------------------------------
+
+if [ -n "$REPO_PROXY" ]; then
+cat >> ${DIR}/etc/apt/apt.conf.d/01Proxy <<EOF
+Acquire::http::Proxy=${REPO_PROXY}
+EOF
+fi
+
