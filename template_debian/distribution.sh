@@ -309,11 +309,11 @@ function updateDebianSourceList() {
     else
         security_suffix="-security"
     fi
-    source="deb https://deb.debian.org/debian-security ${DEBIANVERSION}${security_suffix} main contrib $nonfree"
+    source="deb http://HTTPS//deb.debian.org/debian-security ${DEBIANVERSION}${security_suffix} main contrib $nonfree"
     if ! grep -r -q "$source" "${list}"*; then
         echo -e "$source" >> "${list}"
     fi
-    source="#deb-src https://deb.debian.org/debian-security ${DEBIANVERSION}${security_suffix} main contrib $nonfree"
+    source="#deb-src http://HTTPS//deb.debian.org/debian-security ${DEBIANVERSION}${security_suffix} main contrib $nonfree"
     if ! grep -r -q "$source" "${list}"*; then
         echo -e "$source\n" >> "${list}"
     fi
@@ -459,11 +459,11 @@ deb [trusted=yes] file:/tmp/qubes_repo ${DIST_CODENAME} main
 EOF
     if [[ -n "$USE_QUBES_REPO_VERSION" &&  ${DIST_NAME} != "ubuntu" ]]; then
             cat >> "${INSTALL_DIR}/etc/apt/sources.list.d/qubes-builder.list" <<EOF
-deb [arch=amd64] https://deb.qubes-os.org/r${USE_QUBES_REPO_VERSION}/vm ${DIST_CODENAME} main
+deb [arch=amd64] http://HTTPS//deb.qubes-os.org/r${USE_QUBES_REPO_VERSION}/vm ${DIST_CODENAME} main
 EOF
            if [ "0$USE_QUBES_REPO_TESTING" -gt 0 ]; then
               cat >> "${INSTALL_DIR}/etc/apt/sources.list.d/qubes-builder.list" <<EOF
-deb [arch=amd64] https://deb.qubes-os.org/r${USE_QUBES_REPO_VERSION}/vm ${DIST_CODENAME}-testing main
+deb [arch=amd64] http://HTTPS//deb.qubes-os.org/r${USE_QUBES_REPO_VERSION}/vm ${DIST_CODENAME}-testing main
 EOF
             fi
         chroot_cmd apt-key add - < "${KEYS_DIR}/qubes-debian-r${USE_QUBES_REPO_VERSION}.asc"

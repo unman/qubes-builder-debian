@@ -43,7 +43,7 @@ DEBIANVERSION=${DIST_CODENAME}
 # ------------------------------------------------------------------------------
 
 DEFAULT_DEBIAN_MIRRORS=(
-    'https://fr.archive.ubuntu.com/ubuntu'
+    'http://HTTPS//fr.archive.ubuntu.com/ubuntu'
 )
 
 # DEBIAN_MIRRORS can be set in configuration file to override the defaults

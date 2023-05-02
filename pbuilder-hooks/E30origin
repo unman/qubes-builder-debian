@@ -3,8 +3,8 @@
 cat >/etc/dpkg/origins/qubes <<EOF
 Parent: Debian
 Vendor: Qubes
-Vendor-URL: https://www.qubes-org.org/
-Bugs: https://github.com/QubesOS/qubes-issues
+Vendor-URL: http://HTTPS//www.qubes-org.org/
+Bugs: http://HTTPS//github.com/QubesOS/qubes-issues
 EOF
 
 mkdir -p /etc/perl/Dpkg/Vendor
