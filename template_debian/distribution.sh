@@ -110,8 +110,9 @@ function addDivertPolicy() {
     chroot_cmd dpkg-divert --local --rename --add /sbin/initctl || true
 
     output "Creating policy-rc.d"
-    echo exit 101 > "${INSTALL_DIR}/usr/sbin/policy-rc.d"
-    chmod +x "${INSTALL_DIR}/usr/sbin/policy-rc.d"
+    echo exit 101 > "${INSTALL_DIR}/usr/sbin/policy-rc.d.qubes-builder-debian"
+    chmod +x "${INSTALL_DIR}/usr/sbin/policy-rc.d.qubes-builder-debian"
+    chroot_cmd update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/sbin/policy-rc.d.qubes-builder-debian 1000
 
     # utopic systemd install still broken...
     output "Hacking invoke-rc.d to ignore missing init scripts..."
@@ -126,7 +127,8 @@ function removeDivertPolicy() {
     chroot_cmd dpkg-divert --local --rename --remove /sbin/initctl || true
 
     output "Removing policy-rc.d"
-    rm -f "${INSTALL_DIR}/usr/sbin/policy-rc.d"
+    chroot_cmd update-alternatives --remove policy-rc.d /usr/sbin/policy-rc.d.qubes-builder-debian
+    rm -f "${INSTALL_DIR}/usr/sbin/policy-rc.d.qubes-builder-debian"
 
     output "Restoring invoke-rc.d..."
     chroot_cmd sed -i -e "s/exit 0 #exit 100/exit 100/" /usr/sbin/invoke-rc.d
