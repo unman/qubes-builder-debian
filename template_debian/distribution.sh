@@ -300,10 +300,9 @@ function updateDebianSourceList() {
     touch "${list}"
 
     nonfree=non-free
-    if [ "${DIST_CODENAME}" = "bookworm" ] || [ "${DIST_CODENAME}" = "trixie" ]; then
+    if [ "${DIST_CODENAME}" = "bookworm" ] || [ "${DIST_CODENAME}" = "trixie" ]  || [ "${DIST_CODENAME}" = "forky" ]; then
         nonfree=non-free-firmware
     fi
-
     # Add contrib and non-free component to repository
     sed -i "s/${DIST_CODENAME} main$/${DEBIANVERSION} main contrib $nonfree/g" "${list}"
 
