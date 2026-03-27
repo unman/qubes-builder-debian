@@ -15,7 +15,7 @@ debug " Provisioning machine for Parrot installation
 # Create system mount points
 prepareChroot
 
-chroot_cmd apt-key add - < ${TEMPLATE_CONTENT_DIR}/../keys/parrot-debian-archive-keyring.gpg 
+sudo cp "${TEMPLATE_CONTENT_DIR}/../keys/parrot-archive-keyring.gpg" "${INSTALL_DIR}/etc/apt/trusted.gpg.d/parrot-archive-keyring.gpg"
 chroot_cmd apt-mark hold qubes-core-agent
 chroot_cmd apt-mark hold qubes-core-agent-networking
 chroot_cmd apt-mark hold qubes-gui-agent
