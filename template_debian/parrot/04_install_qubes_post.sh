@@ -9,28 +9,25 @@ source "${TEMPLATE_CONTENT_DIR}/vars.sh"
 source "${TEMPLATE_CONTENT_DIR}/distribution.sh"
 
 ##### "=========================================================================
-debug " Provisioning machine for Parrot installation
+debug " Provisioning machine for Parrot installation"
 ##### "=========================================================================
 
 # Create system mount points
 prepareChroot
 
 sudo cp "${TEMPLATE_CONTENT_DIR}/../keys/parrot-archive-keyring.gpg" "${INSTALL_DIR}/etc/apt/trusted.gpg.d/parrot-archive-keyring.gpg"
+
 chroot_cmd apt-mark hold qubes-core-agent
-chroot_cmd apt-mark hold qubes-core-agent-networking
 chroot_cmd apt-mark hold qubes-gui-agent
 chroot_cmd apt-mark hold linux-image-amd64
 chroot_cmd apt-mark hold grub-pc
 
-
 sudo rm "${INSTALL_DIR}/etc/apt/sources.list"
-sudo cp ${TEMPLATE_CONTENT_DIR}/parrot/sources.list "${INSTALL_DIR}/etc/apt/sources.list
+sudo cp ${TEMPLATE_CONTENT_DIR}/parrot/sources.list "${INSTALL_DIR}/etc/apt/sources.list"
 sudo cp ${TEMPLATE_CONTENT_DIR}/parrot/parrot.list "${INSTALL_DIR}/etc/apt/sources.list.d/parrot.list"  
 
 ## Ensure proxy handling is set
 chroot_cmd sh -c 'sed -i s%https://%http://HTTPS///% /etc/apt/sources.list.d/* '
-
-read -p "Before Installing Parrot Packages "
 
 ##### "=========================================================================
 debug " Installing packages from ParrotOS
@@ -50,9 +47,8 @@ EOF
 chroot_cmd sh -c 'sed -i s%https://%http://HTTPS///% /etc/apt/sources.list.d/* '
 aptUpdate
 
-APT_GET_OPTIONS+=" --allow-downgrades=yes"
-installPackages ${TEMPLATE_CONTENT_DIR}/packages_parrot.list
-read -p "After Installing Parrot Packages "
+#APT_GET_OPTIONS+=" --allow-downgrades=yes"
+installPackages ${TEMPLATE_CONTENT_DIR}/parrot/packages_parrot.list
 
 ##### "=========================================================================
 debug " ParrotOS
